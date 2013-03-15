@@ -100,25 +100,35 @@
 
  var tasklist = {
 
-    get_data: function(id,fn_action){
+    get_data: function(req,res){
 
         $.getJSON('/data_tasklist.php?tasklist='+ id, function(data) {
 
-            fn_action(data);
+            res(data);
 
         });
 
     },
 
-    get_list: function(fn_action){
+    get_list: function(req,res){
 
-        $.getJSON('/data_tasklist.php', function(data) {
+        tasklist_io = io.connect('http://localhost:3000/tasklist');
+
+        tasklist_io.emit('get_list',{});
+
+        tasklist_io.on('list_result',function (data){
+
+            res({'tasklist':data});
+
+        });
+
+        /*$.getJSON('/data_tasklist.php', function(data) {
 
             if(data == '' || data.length == 0) data = undefined;
 
             fn_action(data);
 
-        });
+        });*/
 
     },
 
@@ -151,7 +161,7 @@
 
           template.ini();
 
-          tasklist.get_list( function(data) {
+          tasklist.get_list({},function(data) {
 
               
               if(data !== undefined)
