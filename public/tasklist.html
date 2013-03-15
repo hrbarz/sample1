@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tasks List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
+    <link href="assets/main/css/docs.css" rel="stylesheet">
+    <link href="assets/main/css/style.css" rel="stylesheet">
+
+
+    <link href="assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+
+  </head>
+
+  <body>
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+    <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Bootstrap</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="./index.html">Home</a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+
+
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <li><a href="#tasklist"><i class="icon-chevron-right"></i> TaskList</a></li>
+        </ul>
+      </div>
+
+
+
+      <div class="span9">
+ <!-- Examples
+        ================================================== -->
+        <section>
+
+          <div class="page-header">
+            <h1>
+             <button type="button" id="btn-new-tasklist" class="btn btn-success btn-small">new</button>
+              Task List      
+            </h1>
+          </div>
+
+          <!-- Button to trigger modal -->
+ 
+<!-- Modal -->
+        <div id="form-tasklist" class="modal hide" tabindex="-1" >
+          
+          <div class="container-modal">
+            
+
+            <div class="modal-header">
+              <button type="button" class="close close-modal">×</button>
+              <h3 id="myModalLabel">Task List</h3>
+            </div>
+
+            <div class="alert alert-success hide" id="alert-modal" >
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Save!</strong>
+            </div>
+            
+            <div class="modal-body">
+
+              <form id="form_modal">
+              
+                <label>Name</label>
+                <input type="text" id="modal_name" class="span5" >
+
+                <label>Description</label>
+                <textarea rows="3" id="modal_description" class="span5"></textarea>
+
+                <input type="hidde" id="action_form">
+                <input type="hidde" id="modal_id_form">
+                <input type="hidde" id="modal_idparent_form">
+
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button class="btn close-modal">Close</button>
+              <button class="btn btn-primary save-changes-modal">Save changes</button>
+            </div>
+
+
+          </div>
+          <div class="loading-modal">
+
+          </div>
+
+        </div>
+
+
+        <ul class="thumbnails" id="list-tasklist">
+
+        <script id="speakers-template" type="text/template">  
+            {{#each tasklist}}
+            <li class="span3" id="item-tasklist-{{this.id}}">
+              
+              <div style="padding:0 0 5px 0;"><strong>{{this.name}}</strong>
+                <div class="btn-group" style="float:right">
+                  <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" class="btn-edit-tasklist" data-value="{{this.id}}">Edit</a></li>
+                    <li><a href="#" class="btn-delete-tasklist" data-value="{{this.id}}">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div style="overflow:auto; height:300px; border: 1px solid #ddd; padding: 5px;">
+
+                <button class="btn-new-task btn btn-small btn-block" data-value="{{this.id}}" style="margin-bottom:5px" type="button">new</button>
+
+                <div class="accordion" id="accordion{{this.id}}">
+                  
+                  
+                  {{#each tasks}}
+
+                  <div class="accordion-group" id="item-task-{{this.id}}"  >
+                    
+                    <div class="accordion-heading">
+                      <div class="check-line">
+                        
+                        <input type="checkbox" data-value="{{this.id}}"  class="check-task inline" >    
+                      
+                         <a data-toggle="collapse" id="title-task-{{this.id}}" data-parent="#accordion{{../this.id}}" href="#collapse{{this.id}}">{{this.name}}</a>
+
+                      </div>                                       
+                    </div>
+                    
+                    <div id="collapse{{this.id}}" class="accordion-body collapse collapse">
+                      <div class="accordion-inner">
+                        
+                        <p id="description-task-{{this.id}}" >{{this.description}}</p>
+                        
+                       <div class="buttons-action-task text-right">
+                          <button type="button" data-value="{{this.id}}" class="btn-delete-task btn btn-danger btn-mini">Delete</button>
+                          <button type="button" class="btn btn-mini btn-edit-task" data-value="{{this.id}}">Edit</button>
+                        </div>
+
+                        <hr>
+                        <small style="display:block">update: </small>
+                        <small>create:</small>
+                      </div>
+                    </div>
+
+                  </div>
+                  {{/each}}
+
+                  {{this.description}}
+
+                </div>
+              </div>
+            </li>
+             {{/each}}
+          
+
+         
+
+          </script>
+          </ul>
+
+        </section>
+
+
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p> </p>
+        <ul class="footer-links">
+          <li></li>
+          <li class="muted"></li>
+        </ul>
+      </div>
+    </footer>
+
+
+    <!--script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script-->
+    
+    <script src="assets/handlebars/js/handlebars.js"></script>
+
+    <script src="assets/jquery/jquery.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-button.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-affix.js"></script>
+
+    <script src="assets/main/js/application.js"></script>
+    <script src="assets/timeago/js/jquery.timeago.js"></script>
+
+
+    <div class="modal-backdrop in hide"></div>
+  </body>
+</html>

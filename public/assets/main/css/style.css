@@ -1,0 +1,65 @@
+.form1 {
+  padding: 25px;
+}
+
+section > ul li {
+  margin-bottom: 5px;
+}
+
+section {
+  padding-top: 30px;
+}
+
+.page-header {
+	margin: 20px 0 10px;
+}
+
+.check-line{
+	vertical-align: middle;
+	padding: 5px;
+	padding-left: 9px;
+}
+.check-line input{
+	margin-bottom: 7px;
+}
+.buttons-action-task{
+	padding: 5px;
+}
+
+.loading-modal{
+	height: 200px;
+	background: no-repeat center url('../img/ajax-loader.gif');
+}
+.cross-out{
+	text-decoration: line-through;
+}
+
+#list-tasklist h3{
+	margin-top: 0px;
+	margin-bottom: 2px;
+
+}
+
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: rgba(85,171,213,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(33,99,131,0.4); 
+}
