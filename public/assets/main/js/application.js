@@ -11,7 +11,7 @@
 
            this.source   = $(this.str_query).html();
 
-           $('body').append('<div id="tpl_resource">'+ this.source +'</div>');
+           $('body').append('<div id="tpl_resource" style="display:none">'+ this.source +'</div>');
 
            //$('#tpl_resource').html(this.source);
             

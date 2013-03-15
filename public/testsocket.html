@@ -1,0 +1,27 @@
+
+
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+	<script src="assets/socket.io/socket.io.js"></script>
+	    <script src="assets/jquery/jquery.js"></script>
+
+<script>
+  $(document).on('ready',function(){
+
+  		mio = io.connect('http://localhost:3000/mio');
+
+  		mio.on('connect',function(){
+
+  		});
+
+  		mio.on('a message',function (data){
+  			console.log(data);
+  		});
+  });
+</script>
+
+</body>
+</html>
